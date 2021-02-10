@@ -15,7 +15,7 @@ RUN dpkg --add-architecture i386 \
  && apt upgrade -y
 
 ## install required packages
-RUN apt install -y --no-install-recommends iproute2 cabextract wget curl lib32gcc1 libntlm0 ca-certificates winbind xvfb tzdata locales xauth
+RUN apt install -y --no-install-recommends iproute2 cabextract wget curl lib32gcc1 libntlm0 ca-certificates winbind xvfb tzdata locales xauth gnupg
 
 # Install winehq-stable and with recommends
 RUN wget -qO - https://dl.winehq.org/wine-builds/winehq.key | apt-key add - \
