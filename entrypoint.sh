@@ -10,12 +10,12 @@ wine --version
 if [ ! -z ${SRCDS_APPID} ] && [[ $AUTO_UPDATE == 1 ]]; then
         if [ ! -z ${SRCDS_BETAID} ]; then
                 if [ ! -z ${SRCDS_BETAPASS} ]; then
-                        ./steamcmd/steamcmd.sh +login anonymous $( [[ "${WINDOWS_INSTALL}" == "1" ]] && printf %s '+@sSteamCmdForcePlatformType windows' ) +force_install_dir /home/container +app_update ${SRCDS_APPID} -beta ${SRCDS_BETAID} -betapassword ${SRCDS_BETAPASS} validate +quit
+                        ./steamcmd/steamcmd.sh +login anonymous $( [[ "${WINDOWS_INSTALL}" == "1" ]] && printf %s '+@sSteamCmdForcePlatformType windows' ) +force_install_dir /home/container +app_update ${SRCDS_APPID} -beta ${SRCDS_BETAID} -betapassword ${SRCDS_BETAPASS} +quit
                 else
-                        ./steamcmd/steamcmd.sh +login anonymous $( [[ "${WINDOWS_INSTALL}" == "1" ]] && printf %s '+@sSteamCmdForcePlatformType windows' ) +force_install_dir /home/container +app_update ${SRCDS_APPID} -beta ${SRCDS_BETAID} validate +quit
+                        ./steamcmd/steamcmd.sh +login anonymous $( [[ "${WINDOWS_INSTALL}" == "1" ]] && printf %s '+@sSteamCmdForcePlatformType windows' ) +force_install_dir /home/container +app_update ${SRCDS_APPID} -beta ${SRCDS_BETAID} +quit
                 fi
         else
-                ./steamcmd/steamcmd.sh +login anonymous $( [[ "${WINDOWS_INSTALL}" == "1" ]] && printf %s '+@sSteamCmdForcePlatformType windows' ) +force_install_dir /home/container +app_update ${SRCDS_APPID} validate +quit
+                ./steamcmd/steamcmd.sh +login anonymous $( [[ "${WINDOWS_INSTALL}" == "1" ]] && printf %s '+@sSteamCmdForcePlatformType windows' ) +force_install_dir /home/container +app_update ${SRCDS_APPID} +quit
         fi
 fi
 

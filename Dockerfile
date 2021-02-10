@@ -9,21 +9,22 @@ LABEL author="Sina" maintainer="selenianranger@gmail.com"
 
 ENV DEBIAN_FRONTEND noninteractive
 
-# Add i386 arch
+## Add i386 arch
 RUN dpkg --add-architecture i386 \
  && apt update \
  && apt upgrade -y
 
 ## install required packages
-RUN apt install -y --no-install-recommends iproute2 cabextract wget curl lib32gcc1 libntlm0 ca-certificates winbind xvfb tzdata locales xauth gnupg software-properties-common
+RUN apt install -y --no-install-recommends wget curl lib32gcc1 libntlm0 ca-certificates winbind xvfb tzdata locales xauth gnupg software-properties-common
 
-# Install winehq-stable and with recommends
+## Install winehq-stable and with recommends
 RUN wget -qO - https://dl.winehq.org/wine-builds/winehq.key | apt-key add - \
  && apt-add-repository https://dl.winehq.org/wine-builds/debian/ \
- && wget -O- -q https://download.opensuse.org/repositories/Emulators:/Wine:/Debian/Debian_10/Release.key | apt-key add - \
- && echo "deb http://download.opensuse.org/repositories/Emulators:/Wine:/Debian/Debian_10 ./" | tee /etc/apt/sources.list.d/wine-obs.list \
  && apt-get update \
  && apt install -y --install-recommends winehq-stable
+ 
+## Remove unnecassary packages
+apt -y autoremove
 
 # Set up Winetricks
 RUN	wget -q -O /usr/sbin/winetricks https://raw.githubusercontent.com/Winetricks/winetricks/master/src/winetricks \
