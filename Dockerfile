@@ -1,3 +1,8 @@
+# ----------------------------------
+# Generic Wine image w/ steamcmd support
+# Environment: Debian 19 Buster + WineHQ
+# Minimum Panel Version: 0.7.15
+# ----------------------------------
 FROM debian:buster-slim
 
 LABEL author="Sina" maintainer="selenianranger@gmail.com"
@@ -10,7 +15,7 @@ RUN dpkg --add-architecture i386 \
  && apt upgrade -y
 
 ## install required packages
-RUN apt install -y --no-install-recommends libntlm0 winbind xvfb xauth python3 libncurses5:i386 libncurses6:i386
+RUN apt install -y --no-install-recommends iproute2 cabextract wget curl lib32gcc1 libntlm0 ca-certificates winbind xvfb tzdata locales xauth
 
 # Install winehq-stable and with recommends
 RUN wget -qO - https://dl.winehq.org/wine-builds/winehq.key | apt-key add - \
