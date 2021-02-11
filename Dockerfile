@@ -11,7 +11,7 @@ ENV DEBIAN_FRONTEND noninteractive
 
 ## Add i386 arch
 RUN dpkg --add-architecture i386 \
- && apt update \
+ && apt update -y \
  && apt upgrade -y
 
 ## install required packages
@@ -22,9 +22,9 @@ RUN wget -qO - https://dl.winehq.org/wine-builds/winehq.key | apt-key add - \
  && apt-add-repository https://dl.winehq.org/wine-builds/debian/ \
  && apt-get update \
  && apt install -y --install-recommends winehq-stable
- 
+
 ## Remove unnecassary packages
-apt -y autoremove
+apt autoremove -y
 
 # Set up Winetricks
 RUN	wget -q -O /usr/sbin/winetricks https://raw.githubusercontent.com/Winetricks/winetricks/master/src/winetricks \
@@ -32,7 +32,7 @@ RUN	wget -q -O /usr/sbin/winetricks https://raw.githubusercontent.com/Winetricks
  && echo "en_US.UTF-8 UTF-8" >> /etc/locale.gen \
  && locale-gen \
  && useradd -m -d /home/container container
- 
+
 ENV HOME=/home/container
 ENV WINEPREFIX=/home/container/.wine
 ENV DISPLAY=:0
@@ -46,4 +46,4 @@ USER container
 WORKDIR	/home/container
 
 COPY ./entrypoint.sh /entrypoint.sh
-CMD	 ["/bin/bash", "/entrypoint.sh"]
+CMD	["/bin/bash", "/entrypoint.sh"]
